@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    android:id="@+id/playlayout"
+    android:layout_gravity="center"
+    android:background="#000000"
+    tools:context=".PlayVideo">
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/zoomlayout"
+        android:layout_width="fill_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:foregroundGravity="center"
+        android:layout_height="fill_parent"
+        tools:ignore="MissingConstraints">
+
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:keepScreenOn="true">
+
+        </VideoView>
+
+
+        <include layout="@layout/custom_item">
+
+        </include>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

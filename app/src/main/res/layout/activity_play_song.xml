@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/playerView"
+    android:layout_height="match_parent"
+    tools:context=".PlaySong">
+
+
+    <com.jgabrielfreitas.core.BlurImageView
+        android:id="@+id/blurImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@color/BackgroundColour"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/playback"
+        android:layout_width="@dimen/_40mdp"
+        android:layout_height="@dimen/_40mdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/exo_ic_chevron_left" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="Mere Spano ki Rani Kab Aayegi Tu"
+        android:textColor="@color/textColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/playback"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toEndOf="@+id/playback"
+        app:layout_constraintTop_toTopOf="@+id/playback" />
+
+    <TextView
+        android:id="@+id/totalduration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/_6mdp"
+        android:text="3:45"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/currentduration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/currentduration" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/song_img"
+        android:layout_width="@dimen/_250mdp"
+        android:layout_height="@dimen/_250mdp"
+        android:scaleType="center"
+        android:src="@drawable/play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintVertical_bias="0.07999998"
+        app:riv_border_color="#2979FF"
+        app:riv_border_width="2dp"
+        app:riv_corner_radius="10dp"
+        app:riv_mutate_background="true"
+        app:riv_oval="false">
+
+    </com.makeramen.roundedimageview.RoundedImageView>
+
+    <TextView
+        android:id="@+id/currentduration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6mdp"
+        android:text="0:27"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/song_img"
+        app:layout_constraintVertical_bias="0.65999997" />
+
+    <ImageView
+        android:id="@+id/repeate"
+        android:layout_width="@dimen/_25mdp"
+        android:layout_height="@dimen/_25mdp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/seekBar"
+        app:layout_constraintVertical_bias="0.83"
+        app:srcCompat="@drawable/ic_baseline_repeat_24" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/song_img"
+        app:layout_constraintVertical_bias="0.17000002" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar"
+        app:layout_constraintVertical_bias="0.22000003">
+
+        <ImageView
+            android:id="@+id/preview_songs"
+            android:layout_width="@dimen/_60mdp"
+            android:layout_height="@dimen/_60mdp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_baseline_skip_previous_24" />
+
+        <ImageView
+            android:id="@+id/playsong"
+            android:layout_width="@dimen/_60mdp"
+            android:layout_height="@dimen/_60mdp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_baseline_pause_circle_24" />
+
+        <ImageView
+            android:id="@+id/nextsong"
+            android:layout_width="@dimen/_60mdp"
+            android:layout_height="@dimen/_60mdp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_baseline_skip_next_24" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
