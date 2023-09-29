@@ -17,7 +17,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.jgabrielfreitas.core.BlurImageView;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
@@ -31,7 +30,6 @@ public class PlaySong extends AppCompatActivity {
     ArrayList<SongModel>songs= new ArrayList<>();
     MediaPlayer mediaPlayer;
     ConstraintLayout playerview;
-    BlurImageView blurImageView;
     Handler handler;
     int position;
     SeekBar seekBar;
@@ -53,7 +51,7 @@ public class PlaySong extends AppCompatActivity {
         playsong = findViewById(R.id.playsong);
         seekBar = findViewById(R.id.seekBar);
         playerview = findViewById(R.id.playerView);
-        blurImageView = findViewById(R.id.blurImageView);
+
         playback = findViewById(R.id.playback);
         handler = new Handler();
 
@@ -86,12 +84,13 @@ public class PlaySong extends AppCompatActivity {
        try {
            if (songimg != null) {
                songimg.setImageURI(Uri.parse(Songimage));
+
            }
        }catch (Exception e){
        }
         if(songimg.getDrawable() == null) {
               songimg.setImageResource(icon);
-            }
+        }
 
 
 
@@ -114,11 +113,10 @@ public class PlaySong extends AppCompatActivity {
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
+                    position %= songs.size();
 
-                         if (position<(songs.size()-1)){
+                    if (position<(songs.size()-1)){
                              position= position+1;
-                             position %= songs.size();
-
                              // set autoplay song
                              String Songpath = songs.get(position).getPath();
 
@@ -218,8 +216,6 @@ public class PlaySong extends AppCompatActivity {
                   try {
                       if (songimg != null) {
                           songimg.setImageURI(Uri.parse(nextalbum));
-
-
                       }
                   }catch (Exception e){}
 
@@ -228,7 +224,6 @@ public class PlaySong extends AppCompatActivity {
                     songimg.setImageResource(icon);
 
                 }
-
                 // play next song
                 String Songpath = songs.get(position).getPath();
 
@@ -383,7 +378,6 @@ public class PlaySong extends AppCompatActivity {
         updateSeekbar();
 
     }
-
 
 
 

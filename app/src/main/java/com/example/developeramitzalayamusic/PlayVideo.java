@@ -6,7 +6,6 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -15,7 +14,6 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -35,7 +33,7 @@ public class PlayVideo extends AppCompatActivity {
     VideoView videoView;
     SeekBar vseekbar;
     Handler handler;
-    ImageView lockscreen, previewvideo, playvideo, nextvideo, unlockscreen, rotation,forwordbtn,backwordbtn;
+    ImageView lockscreen, previewvideo, playvideo, nextvideo, unlockscreen, rotation,forwordbtn,backwordbtn,backbtn;
     ArrayList<VideoModel> videos = new ArrayList<>();
     int position;
     boolean isOpen = false;
@@ -73,6 +71,7 @@ public class PlayVideo extends AppCompatActivity {
         zoomcount = findViewById(R.id.zoomCount);
         forwordbtn = findViewById(R.id.forwordbtn);
         backwordbtn = findViewById(R.id.backwordbtn);
+        backbtn = findViewById(R.id.backbutton);
         handler = new Handler();
 
         dm = new DisplayMetrics();
@@ -92,13 +91,14 @@ public class PlayVideo extends AppCompatActivity {
             }
         });
 
-
+         // skip 30 second button
         forwordbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 videoView.seekTo(videoView.getCurrentPosition()+ 30000);
             }
         });
+        // back 10 second
         backwordbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,12 +109,7 @@ public class PlayVideo extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
+        // zoom layout
         zoomlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,7 +158,8 @@ public class PlayVideo extends AppCompatActivity {
                 videotitle.setText(autoplayvideoName);
 
                 // set duration
-                ced.setText(getDuration(Integer.parseInt(duration)));
+                String currentduration= videos.get(position).getDuration();
+                ced.setText(getDuration(Integer.parseInt(currentduration)));
 
                 // play current video
                 String path = videos.get(position).getId();
@@ -261,6 +257,10 @@ public class PlayVideo extends AppCompatActivity {
 
                 unlockscreen.setVisibility(View.VISIBLE);
                 hideControls();
+                zoomlayout.setEnabled(false);
+                if (isOpen){
+                    zoomlayout.setEnabled(true);
+                }
 
 
             }
@@ -276,8 +276,19 @@ public class PlayVideo extends AppCompatActivity {
             }
         });
 
+        // back button click on
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PlayVideo.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         // screen rotation
         rotation.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SourceLockedOrientationActivity")
             @Override
             public void onClick(View v) {
                 int oreientation = getResources().getConfiguration().orientation;
@@ -410,6 +421,7 @@ public class PlayVideo extends AppCompatActivity {
         rotation.setVisibility(View.GONE);
         forwordbtn.setVisibility(View.GONE);
         backwordbtn.setVisibility(View.GONE);
+        backbtn.setVisibility(View.GONE);
 
 
         // hide navigation and status
@@ -417,26 +429,19 @@ public class PlayVideo extends AppCompatActivity {
         if (window == null){
             return;
         }
-        window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        final View decorview = window.getDecorView();
-        if (decorview!= null){
-            int uiopation = decorview.getSystemUiVisibility();
+        window.getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 
-            if (Build.VERSION.SDK_INT >=14){
-                uiopation &= View.SYSTEM_UI_FLAG_LOW_PROFILE;
-            }
-            if (Build.VERSION.SDK_INT >=16){
-                uiopation &= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-            }
 
-            if (Build.VERSION.SDK_INT >=19){
-                uiopation &= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-            }
-            decorview.setSystemUiVisibility(uiopation);
+
         }
-    }
+
     private void hideShowControls(){
         videotitle.setVisibility(View.VISIBLE);
         vseekbar.setVisibility(View.VISIBLE);
@@ -449,32 +454,20 @@ public class PlayVideo extends AppCompatActivity {
         rotation.setVisibility(View.VISIBLE);
         forwordbtn.setVisibility(View.VISIBLE);
         backwordbtn.setVisibility(View.VISIBLE);
+        backbtn.setVisibility(View.VISIBLE);
 
 
         // show navigation and status
         final Window window = this.getWindow();
-        if (window!= null){
-            return;
-        }
-        window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
-        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        assert window != null;
+        window.getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 
-        final View decorview = window.getDecorView();
-        if (decorview!= null){
-            int uiopation = decorview.getSystemUiVisibility();
-
-            if (Build.VERSION.SDK_INT >=14){
-                uiopation &= ~View.SYSTEM_UI_FLAG_LOW_PROFILE;
-            }
-            if (Build.VERSION.SDK_INT >=16){
-                uiopation &= ~View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-            }
-
-            if (Build.VERSION.SDK_INT >=19){
-                uiopation &= ~View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-            }
-            decorview.setSystemUiVisibility(uiopation);
-        }
     }
 
 

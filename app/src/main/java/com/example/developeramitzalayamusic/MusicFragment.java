@@ -15,7 +15,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.OvershootInterpolator;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,7 +29,6 @@ import java.util.ArrayList;
 
 import SongPakage.SongAdapter;
 import SongPakage.SongModel;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 public class MusicFragment extends Fragment {
     RecyclerView recyclerView;
@@ -105,12 +103,8 @@ public class MusicFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new SongAdapter(getContext(),Songs,mediaPlayer );
-        //recyclerView.setAdapter(adapter);
-        ScaleInAnimationAdapter scaleInAnimationAdapter= new ScaleInAnimationAdapter(adapter);
-        scaleInAnimationAdapter.setDuration(700);
-        scaleInAnimationAdapter.setInterpolator(new OvershootInterpolator());
-        scaleInAnimationAdapter.setFirstOnly(false);
-        recyclerView.setAdapter(scaleInAnimationAdapter);
+        recyclerView.setAdapter(adapter);
+
 
 
 

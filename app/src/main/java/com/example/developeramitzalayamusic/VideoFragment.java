@@ -12,7 +12,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.OvershootInterpolator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -20,12 +19,12 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import VideoPaakage.VideoAdapter;
 import VideoPaakage.VideoModel;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 
 public class VideoFragment extends Fragment {
@@ -100,12 +99,7 @@ public class VideoFragment extends Fragment {
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 videorc.setLayoutManager(linearLayoutManager);
                 adapter = new VideoAdapter(getContext(), videos);
-                ScaleInAnimationAdapter scaleInAnimationAdapter= new ScaleInAnimationAdapter(adapter);
-                scaleInAnimationAdapter.setDuration(1000);
-                scaleInAnimationAdapter.setInterpolator(new OvershootInterpolator());
-                scaleInAnimationAdapter.setFirstOnly(false);
-                videorc.setAdapter(scaleInAnimationAdapter);
-
+                videorc.setAdapter(adapter);
             }
         }
         return view;

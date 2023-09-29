@@ -7,6 +7,16 @@
    >
 
     <ImageView
+        android:id="@+id/backbutton"
+        android:layout_width="@dimen/_40mdp"
+        android:layout_height="@dimen/_40mdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/exo_ic_chevron_left" />
+
+    <ImageView
         android:id="@+id/forwordbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,18 +79,20 @@
         android:id="@+id/videoTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:gravity="center_horizontal"
-        android:maxLines="2"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
         android:singleLine="true"
+        android:gravity="center|center_horizontal"
         android:text="Mere spno ki rani kb aayegi tu"
         android:textColor="#EBDDDD"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/backbutton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/backbutton"
+        app:layout_constraintTop_toTopOf="@+id/backbutton" />
 
     <TextView
         android:id="@+id/cveduration"

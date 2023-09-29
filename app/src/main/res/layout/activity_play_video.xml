@@ -11,23 +11,21 @@
     tools:context=".PlayVideo">
 
 
-
-
     <RelativeLayout
         android:id="@+id/zoomlayout"
         android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:foregroundGravity="center"
         android:gravity="center"
         android:orientation="horizontal"
-        android:foregroundGravity="center"
-        android:layout_height="fill_parent"
         tools:ignore="MissingConstraints">
 
         <VideoView
             android:id="@+id/videoView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:keepScreenOn="true">
 
         </VideoView>

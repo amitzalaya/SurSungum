@@ -4,19 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/playerView"
+    android:background="@color/BackgroundColour"
     android:layout_height="match_parent"
     tools:context=".PlaySong">
 
 
-    <com.jgabrielfreitas.core.BlurImageView
-        android:id="@+id/blurImageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:src="@color/BackgroundColour"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/playback"

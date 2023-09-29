@@ -41,6 +41,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.15.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'androidx.multidex:multidex:2.0.1'
+
     // exoplayer
     implementation 'com.google.android.exoplayer:exoplayer:2.14.1'
 
@@ -52,15 +53,6 @@ dependencies {
 
     // dynamic size
     implementation 'com.github.MrNouri:DynamicSizes:1.0'
-
-    // recyclerview animations
-    implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
-
-    // palete
-    implementation 'androidx.palette:palette:1.0.0'
-
-    // blurImageView
-    implementation 'com.github.jgabrielfreitas:BlurImageView:1.0.1'
 
 
 
